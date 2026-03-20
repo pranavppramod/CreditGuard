@@ -32,12 +32,12 @@ const PersonalFinancial = () => {
           <div className="space-y-6 flex-grow">
             <div className={getFieldStyle('age')} onFocus={() => setActiveField('age')}>
               <label className={labelClass}>Current Age</label>
-              <input type="number" inputMode="numeric" placeholder="00" className={inputClass} />
+              <input type="number" onWheel={(e) => e.target.blur()} inputMode="numeric" placeholder="00" className={inputClass} />
             </div>
 
             <div className={getFieldStyle('dependants')} onFocus={() => setActiveField('dependants')}>
               <label className={labelClass}>Dependants</label>
-              <input type="number" inputMode="numeric" placeholder="0" className={inputClass} />
+              <input type="number" onWheel={(e) => e.target.blur()} inputMode="numeric" placeholder="0" className={inputClass} />
             </div>
 
             <div className={getFieldStyle('residence')} onFocus={() => setActiveField('residence')}>
@@ -66,7 +66,7 @@ const PersonalFinancial = () => {
 
             <div className={getFieldStyle('years')} onFocus={() => setActiveField('years')}>
               <label className={labelClass}>Years At Current Residence</label>
-              <input type="number" inputMode="decimal" placeholder="0.00" className={inputClass} />
+              <input type="number" onWheel={(e) => e.target.blur()} inputMode="decimal" placeholder="0.00" className={inputClass} />
             </div>
           </div>
         </div>
@@ -80,7 +80,7 @@ const PersonalFinancial = () => {
           <div className="space-y-6 flex-grow">
             <div className={getFieldStyle('balance')} onFocus={() => setActiveField('balance')}>
               <label className={labelClass}>Bank Balance (USD)</label>
-              <input type="number" inputMode="decimal" placeholder="0.00" className={inputClass} />
+              <input type="number" onWheel={(e) => e.target.blur()} inputMode="decimal" placeholder="0.00" className={inputClass} />
             </div>
 
             <div className={getFieldStyle('lti')} onFocus={() => setActiveField('lti')}>
@@ -90,6 +90,7 @@ const PersonalFinancial = () => {
                   <span className="text-[9px] text-slate-900/40 dark:text-white/40 uppercase font-black tracking-widest block mb-1">Requested Loan</span>
                   <input
                     type="number"
+                    onWheel={(e) => e.target.blur()}
                     inputMode="decimal"
                     placeholder="0.00"
                     className={inputClass}
@@ -100,6 +101,7 @@ const PersonalFinancial = () => {
                   <span className="text-[9px] text-slate-900/40 dark:text-white/40 uppercase font-black tracking-widest block mb-1">Annual Income</span>
                   <input
                     type="number"
+                    onWheel={(e) => e.target.blur()}
                     inputMode="decimal"
                     placeholder="0.00"
                     className={inputClass}
@@ -111,7 +113,7 @@ const PersonalFinancial = () => {
 
             <div className={getFieldStyle('utilization')} onFocus={() => setActiveField('utilization')}>
               <label className={labelClass}>Credit Utilization</label>
-              <input type="number" inputMode="numeric" max="100" placeholder="0%" className={inputClass} />
+              <input type="number" onWheel={(e) => e.target.blur()} inputMode="numeric" max="100" placeholder="0%" className={inputClass} />
             </div>
           </div>
         </div>

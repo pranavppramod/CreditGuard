@@ -25,7 +25,7 @@ const CreditPredictor = ({ isDarkMode }) => {
                      font-black text-lg md:text-2xl tracking-[0.2em] md:tracking-[0.3em] 
                      rounded-xl md:rounded-2xl overflow-hidden transition-all 
                      hover:scale-105 active:scale-95 disabled:opacity-100 backdrop-blur-2xl
-                     mx-auto uppercase text-black bg-white/10 border-white/10 dark:text-white dark:bg-black/10 dark:border-black/10`}
+                     mx-auto uppercase shadow-2xl text-black bg-white/10 border-white/10 dark:text-white border-b dark:bg-black/10 dark:border-b dark:border-black/10`}
         >
           <span className="relative z-10 antialiased">
             {loading ? "Analyzing Profile..." : "Generate Credit Report"}
@@ -42,7 +42,7 @@ const CreditPredictor = ({ isDarkMode }) => {
             <span className={`text-[10px] font-black uppercase tracking-[0.4em] opacity-50`}>
               Analysis Result
             </span>
-            <h1 className="text-5xl md:text-8xl font-black tracking-tighter italic">
+            <h1 className="text-5xl md:text-8xl font-bold tracking-tighter">
               {prediction.status}
             </h1>
           </div>

@@ -32,17 +32,17 @@ const LoanTerms = () => {
           <div className="space-y-6 flex-grow">
             <div className={getFieldStyle('sanction')} onFocus={() => setActiveField('sanction')}>
               <label className={labelClass}>Sanction Amount ($)</label>
-              <input type="number" inputMode="decimal" placeholder="0.00" className={inputClass} />
+              <input type="number" onWheel={(e) => e.target.blur()} inputMode="decimal" placeholder="0.00" className={inputClass} />
             </div>
 
             <div className={getFieldStyle('tenure')} onFocus={() => setActiveField('tenure')}>
               <label className={labelClass}>Loan Tenure (Months)</label>
-              <input type="number" inputMode="numeric" placeholder="Months" className={inputClass} />
+              <input type="number" onWheel={(e) => e.target.blur()} inputMode="numeric" placeholder="Months" className={inputClass} />
             </div>
 
             <div className={getFieldStyle('total')} onFocus={() => setActiveField('total')}>
               <label className={labelClass}>Total Loan Months</label>
-              <input type="number" inputMode="numeric" placeholder="Months" className={inputClass} />
+              <input type="number" onWheel={(e) => e.target.blur()} inputMode="numeric" placeholder="Months" className={inputClass} />
             </div>
 
             <div className={getFieldStyle('type')} onFocus={() => setActiveField('type')}>
@@ -102,22 +102,48 @@ const LoanTerms = () => {
           </h2>
 
           <div className="space-y-6 flex-grow">
-            <div className={getFieldStyle('open_acc')} onFocus={() => setActiveField('open_acc')}>
-              <label className={labelClass}>Open Accounts</label>
-              <input type="number" inputMode="numeric" placeholder="0" className={inputClass} />
-              <p className="text-[10px] text-slate-900/40 dark:text-white/40 mt-2 italic">Currently active credit lines.</p>
-            </div>
-
-            <div className={getFieldStyle('closed_acc')} onFocus={() => setActiveField('closed_acc')}>
-              <label className={labelClass}>Closed Accounts</label>
-              <input type="number" inputMode="numeric" placeholder="0" className={inputClass} />
-              <p className="text-[10px] text-slate-900/40 dark:text-white/40 mt-2 italic">Settled or closed credit history.</p>
+            <div className={getFieldStyle('lti')} onFocus={() => setActiveField('lti')}>
+              <label className={labelClass}>Bank Accounts</label>
+              <div className="flex flex-col gap-6 mt-4">
+                <div>
+                  <span className="text-[9px] text-slate-900/40 dark:text-white/40 uppercase font-black tracking-widest block mb-1">Open Accounts</span>
+                  <input
+                    type="number"
+                    onWheel={(e) => e.target.blur()}
+                    inputMode="decimal"
+                    placeholder="0.00"
+                    className={inputClass}
+                    onChange={(e) => setFinancials({ ...financials, loanAmount: parseFloat(e.target.value) || 0 })}
+                  />
+                </div>
+                <div>
+                  <span className="text-[9px] text-slate-900/40 dark:text-white/40 uppercase font-black tracking-widest block mb-1">Closed Accounts</span>
+                  <input
+                    type="number"
+                    onWheel={(e) => e.target.blur()}
+                    inputMode="decimal"
+                    placeholder="0.00"
+                    className={inputClass}
+                    onChange={(e) => setFinancials({ ...financials, income: parseFloat(e.target.value) || 0 })}
+                  />
+                </div>
+              </div>
             </div>
 
             <div className={getFieldStyle('enquiry')} onFocus={() => setActiveField('enquiry')}>
               <label className={labelClass}>Enquiry Count</label>
-              <input type="number" inputMode="numeric" placeholder="0" className={inputClass} />
+              <input type="number" onWheel={(e) => e.target.blur()} inputMode="numeric" placeholder="0" className={inputClass} />
               <p className="text-[10px] text-slate-900/40 dark:text-white/40 mt-2 italic">Recent credit check requests.</p>
+            </div>
+
+            <div className={getFieldStyle('dp_months')} onFocus={() => setActiveField('dp_months')}>
+              <label className={labelClass}>Deliquent Months</label>
+              <input type="number" onWheel={(e) => e.target.blur()} inputMode="numeric" placeholder="0" className={inputClass} />
+            </div>
+
+            <div className={getFieldStyle('dpd')} onFocus={() => setActiveField('dpd')}>
+              <label className={labelClass}>Total DPD</label>
+              <input type="number" onWheel={(e) => e.target.blur()} inputMode="numeric" placeholder="0" className={inputClass} />
             </div>
           </div>
         </div>

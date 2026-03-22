@@ -1,5 +1,7 @@
 # **CreditGuard - An AI Powered Credit Risk Predictor**
 
+![Event Banner](./public/banner.png)
+
 ### **What is it?**
   This is the Front End Interface created using React + Vite using frameworks like TailWindCSS to create an optimal webpage for the CreditGuard Application developed by Kenaz Jose.
   

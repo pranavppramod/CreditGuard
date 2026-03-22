@@ -2,6 +2,8 @@
 
 ![Event Banner](./public/banner.png)
 
+---
+
 ### **What is it?**
   This is the Front End Interface created using React + Vite using frameworks like TailWindCSS to create an optimal webpage for the CreditGuard Application developed by Kenaz Jose.
   
@@ -11,5 +13,3 @@
 * Easy to use forms
 * Frosted Glass UI
 * Dark & Light Modes
-
----

@@ -1,11 +1,26 @@
 import React, { useState } from 'react';
 
+/**
+ * PersonalFinancial Component
+ * A dual-column form for collecting user demographic and financial data.
+ * Features: Dynamic focus highlighting, theme-aware glassmorphism, and LTI (Loan-to-Income) state tracking.
+ */
 const PersonalFinancial = () => {
+  /* --- STATE MANAGEMENT --- */
+  // Tracks which input group is currently focused to apply highlight styles
   const [activeField, setActiveField] = useState(null);
+  
+  // Stores numeric values for loan and income to facilitate real-time calculations
   const [financials, setFinancials] = useState({ loanAmount: 0, income: 0 });
+  
+  // Tracks the selected radio option for housing status
   const [residenceType, setResidenceType] = useState('Owned');
 
-  // Dynamic style for both Dark and Light modes
+  /* --- DYNAMIC STYLING LOGIC --- */
+  /**
+   * getFieldStyle: Determines the container style based on focus state.
+   * Uses Tailwind's dark mode modifiers and transition properties for a smooth UI.
+   */
   const getFieldStyle = (fieldName) => {
     const isActive = activeField === fieldName;
     return `p-6 rounded-2xl border transition-all duration-300 backdrop-blur-xl ${
@@ -15,31 +30,37 @@ const PersonalFinancial = () => {
     }`;
   };
 
-  // Theme-aware shared classes
+  // Reusable utility classes for consistency across all text inputs and labels
   const inputClass = "w-full bg-transparent border-b border-black/20 dark:border-white/20 focus:border-black dark:focus:border-white outline-none text-slate-900 dark:text-white text-lg py-1 transition-all appearance-none placeholder:text-slate-900/30 dark:placeholder:text-white/20";
   const labelClass = "block text-slate-900 dark:text-white text-[10px] font-black mb-2 uppercase tracking-[0.2em] opacity-60";
 
   return (
+    /* --- OUTER WRAPPER --- */
     <div className="h-auto min-w-screen w-full md:w-[80%] mx-auto flex items-center justify-center px-4 pt-7 pb-20 md:p-8">
+      
+      {/* MAIN FORM GRID: Transitions from 1 column on mobile to 2 columns on desktop */}
       <div className="w-full max-w-6xl flex flex-col md:flex-row gap-6 md:gap-15 items-stretch">
 
-        {/* LEFT COLUMN: Personal Information */}
+        {/* SECTION 1: LEFT COLUMN - Personal Information */}
         <div className="flex-1 flex flex-col p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] bg-white/30 dark:bg-black/10 border border-black/10 dark:border-white/10 backdrop-blur-2xl shadow-2xl transition-all duration-500">
           <h2 className="text-lg md:text-xl font-black text-slate-900 dark:text-white mb-6 md:mb-10 uppercase tracking-[0.3em] border-b border-black/10 dark:border-white/10 pb-4">
             Personal <span className="text-slate-900/30 dark:text-white/30 font-light">Data</span>
           </h2>
 
           <div className="space-y-6 flex-grow">
+            {/* Age Input Group */}
             <div className={getFieldStyle('age')} onFocus={() => setActiveField('age')}>
               <label className={labelClass}>Current Age</label>
               <input type="number" onWheel={(e) => e.target.blur()} inputMode="numeric" placeholder="00" className={inputClass} />
             </div>
 
+            {/* Dependants Input Group */}
             <div className={getFieldStyle('dependants')} onFocus={() => setActiveField('dependants')}>
               <label className={labelClass}>Dependants</label>
               <input type="number" onWheel={(e) => e.target.blur()} inputMode="numeric" placeholder="0" className={inputClass} />
             </div>
 
+            {/* Residence Type Selection (Radio Group) */}
             <div className={getFieldStyle('residence')} onFocus={() => setActiveField('residence')}>
               <label className={labelClass}>Residence Type</label>
               <div className="mt-4">
@@ -64,6 +85,7 @@ const PersonalFinancial = () => {
               </div>
             </div>
 
+            {/* Tenure Input Group */}
             <div className={getFieldStyle('years')} onFocus={() => setActiveField('years')}>
               <label className={labelClass}>Years At Current Residence</label>
               <input type="number" onWheel={(e) => e.target.blur()} inputMode="decimal" placeholder="0.00" className={inputClass} />
@@ -71,21 +93,24 @@ const PersonalFinancial = () => {
           </div>
         </div>
 
-        {/* RIGHT COLUMN: Financial Profile */}
+        {/* SECTION 2: RIGHT COLUMN - Financial Profile */}
         <div className="flex-1 flex flex-col p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] bg-white/30 dark:bg-black/10 border border-black/10 dark:border-white/10 backdrop-blur-2xl shadow-2xl transition-all duration-500">
           <h2 className="text-lg md:text-xl font-black text-slate-900 dark:text-white mb-6 md:mb-10 uppercase tracking-[0.3em] border-b border-black/10 dark:border-white/10 pb-4">
             Financial <span className="text-slate-900/30 dark:text-white/30 font-light">Profile</span>
           </h2>
 
           <div className="space-y-6 flex-grow">
+            {/* Liquid Assets Input */}
             <div className={getFieldStyle('balance')} onFocus={() => setActiveField('balance')}>
               <label className={labelClass}>Bank Balance (USD)</label>
               <input type="number" onWheel={(e) => e.target.blur()} inputMode="decimal" placeholder="0.00" className={inputClass} />
             </div>
 
+            {/* LTI (Loan-To-Income) Input Group */}
             <div className={getFieldStyle('lti')} onFocus={() => setActiveField('lti')}>
               <label className={labelClass}>LTI Analytics</label>
               <div className="flex flex-col gap-6 mt-4">
+                {/* Sub-field: Loan Amount */}
                 <div>
                   <span className="text-[9px] text-slate-900/40 dark:text-white/40 uppercase font-black tracking-widest block mb-1">Requested Loan</span>
                   <input
@@ -97,6 +122,7 @@ const PersonalFinancial = () => {
                     onChange={(e) => setFinancials({ ...financials, loanAmount: parseFloat(e.target.value) || 0 })}
                   />
                 </div>
+                {/* Sub-field: Annual Income */}
                 <div>
                   <span className="text-[9px] text-slate-900/40 dark:text-white/40 uppercase font-black tracking-widest block mb-1">Annual Income</span>
                   <input
@@ -111,6 +137,7 @@ const PersonalFinancial = () => {
               </div>
             </div>
 
+            {/* Credit Utilization Input */}
             <div className={getFieldStyle('utilization')} onFocus={() => setActiveField('utilization')}>
               <label className={labelClass}>Credit Utilization</label>
               <input type="number" onWheel={(e) => e.target.blur()} inputMode="numeric" max="100" placeholder="0%" className={inputClass} />
